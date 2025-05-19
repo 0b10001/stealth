@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Task } from '../types';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Task } from "../types";
+import React from "react";
 
 interface TaskListProps {
   userId: number;
@@ -8,7 +9,7 @@ interface TaskListProps {
 
 const TaskList = ({ userId }: TaskListProps) => {
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [newTask, setNewTask] = useState('');
+  const [newTask, setNewTask] = useState("");
 
   useEffect(() => {
     fetchTasks();
@@ -16,21 +17,25 @@ const TaskList = ({ userId }: TaskListProps) => {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/users/${userId}/tasks`);
+      const response = await axios.get(
+        `http://localhost:3001/users/${userId}/tasks`,
+      );
       setTasks(response.data);
     } catch (error) {
-      console.error('Error fetching tasks:', error);
+      console.error("Error fetching tasks:", error);
     }
   };
 
   const handleCreateTask = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post(`http://localhost:3001/users/${userId}/tasks`, { title: newTask });
-      setNewTask('');
+      await axios.post(`http://localhost:3001/users/${userId}/tasks`, {
+        title: newTask,
+      });
+      setNewTask("");
       fetchTasks();
     } catch (error) {
-      console.error('Error creating task:', error);
+      console.error("Error creating task:", error);
     }
   };
 
@@ -40,13 +45,16 @@ const TaskList = ({ userId }: TaskListProps) => {
       <form onSubmit={handleCreateTask} className="mb-4">
         <div className="input-group">
           <input
+            required
             type="text"
             className="form-control"
             placeholder="New task"
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
           />
-          <button type="submit" className="btn btn-primary">Add Task</button>
+          <button type="submit" className="btn btn-primary">
+            Add Task
+          </button>
         </div>
       </form>
 
@@ -61,4 +69,4 @@ const TaskList = ({ userId }: TaskListProps) => {
   );
 };
 
-export default TaskList; 
+export default TaskList;
