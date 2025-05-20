@@ -1,7 +1,9 @@
 import sqlite3 from 'sqlite3';
 import { Database } from 'sqlite3';
+import path from 'path';
 
-const db: Database = new sqlite3.Database('users_tasks.db');
+const dbPath = path.join(__dirname, '../../users_tasks.db');
+const db: Database = new sqlite3.Database(dbPath);
 
 // Create tables if they don't exist
 db.serialize(() => {
@@ -23,5 +25,17 @@ db.serialize(() => {
     )
   `);
 });
+
+export const closeDatabase = () => {
+  return new Promise<void>((resolve, reject) => {
+    db.close((err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+};
 
 export default db; 

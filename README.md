@@ -1,6 +1,30 @@
 # stealth
 
+[![Test](https://github.com/ob10001/stealth/actions/workflows/test.yml/badge.svg)](https://github.com/ob10001/stealth/actions/workflows/test.yml)
+
 Live Demo: [https://stealth-puhc.vercel.app/](https://stealth-puhc.vercel.app/)
+
+## Running Tests
+
+### Frontend Tests
+```sh
+cd frontend
+npm install
+npm test
+```
+
+### Backend Tests
+```sh
+cd backend
+npm install
+npm test
+```
+
+### Running All Tests
+```sh
+# From the root directory
+npm run test
+```
 
 ## Running with Docker
 
