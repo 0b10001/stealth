@@ -44,3 +44,15 @@
 
 - Make sure the backend is running before using the frontend for full functionality.
 - Both backend and frontend use `npm` as the package manager.
+
+---
+
+## Considerations and Assumptions
+
+- **Node.js and npm**: It is assumed that Node.js and npm are installed on your system. If not, please install them from [nodejs.org](https://nodejs.org/).
+- **Ports**: The backend runs on port 3001 and the frontend on port 5173. Ensure these ports are not in use by other applications.
+- **Database**: The backend uses SQLite. Ensure that the database file (`users_tasks.db`) is present in the `backend` directory.
+- **Environment Variables**: No additional environment variables are required for basic setup. If you need to configure custom settings, refer to the respective configuration files.
+- **Cross-Origin Resource Sharing (CORS)**: The backend is configured to allow CORS requests from the frontend. If you change the frontend URL, update the CORS settings in `backend/src/index.ts`.
+- **Dependencies**: All necessary dependencies are listed in the `package.json` files. Run `npm install` in both the `backend` and `frontend` directories to install them.
+- **Development vs. Production**: The instructions provided are for development mode. For production, build the backend and frontend using the respective build commands.
