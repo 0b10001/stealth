@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { VITE_OPENWEATHER_API_KEY } from '../env';
 
 interface WeatherData {
   main: {
@@ -24,12 +25,11 @@ const Weather = () => {
     try {
       setLoading(true);
       setError(null);
-      const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
-      if (!API_KEY) {
+      if (!VITE_OPENWEATHER_API_KEY) {
         throw new Error('OpenWeather API key is not configured');
       }
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${VITE_OPENWEATHER_API_KEY}`
       );
       setWeather(response.data);
       setLocation(city);

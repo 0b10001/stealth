@@ -1,6 +1,11 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import Weather from '../Weather';
+
+// Mock environment variable
+vi.mock('../env', () => ({
+  VITE_OPENWEATHER_API_KEY: 'test-api-key'
+}));
 
 // Mock axios
 vi.mock('axios', () => ({
@@ -16,6 +21,11 @@ vi.mock('axios', () => ({
 }));
 
 describe('Weather Component', () => {
+  beforeEach(() => {
+    // Reset mocks before each test
+    vi.clearAllMocks();
+  });
+
   it('renders weather information', async () => {
     render(<Weather />);
     

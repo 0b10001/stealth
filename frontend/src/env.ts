@@ -1,0 +1,1 @@
+export const VITE_OPENWEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY || 'test-api-key'; 
