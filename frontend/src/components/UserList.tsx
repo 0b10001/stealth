@@ -94,16 +94,28 @@ const UserList = () => {
               onChange={(e) => setFilter(e.target.value)}
             />
           </div>
-          <div className="list-group">
-            {currentUsers.map((user) => (
-              <button
-                key={user.id}
-                className={`list-group-item list-group-item-action ${selectedUser === user.id ? "active" : ""}`}
-                onClick={() => setSelectedUser(user.id)}
-              >
-                {user.name} ({user.email})
-              </button>
-            ))}
+          <div className="table-responsive">
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentUsers.map((user) => (
+                  <tr
+                    key={user.id}
+                    className={selectedUser === user.id ? "table-active" : ""}
+                    onClick={() => setSelectedUser(user.id)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
 
           <nav>
