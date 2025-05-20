@@ -8,6 +8,9 @@ const UserList = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [selectedUser, setSelectedUser] = useState<number | null>(null);
   const [newUser, setNewUser] = useState({ name: "", email: "" });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [usersPerPage] = useState(5);
+  const [filter, setFilter] = useState("");
 
   useEffect(() => {
     fetchUsers();
@@ -34,6 +37,17 @@ const UserList = () => {
       console.error("Error creating user:", error);
     }
   };
+
+  const filteredUsers = users.filter((user) =>
+    user.name.toLowerCase().includes(filter.toLowerCase()) ||
+    user.email.toLowerCase().includes(filter.toLowerCase())
+  );
+
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
+
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
     <div className="container mt-4">
@@ -71,8 +85,17 @@ const UserList = () => {
           </form>
 
           <h2 className="mt-4">Users</h2>
+          <div className="mb-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Filter users..."
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+            />
+          </div>
           <div className="list-group">
-            {users.map((user) => (
+            {currentUsers.map((user) => (
               <button
                 key={user.id}
                 className={`list-group-item list-group-item-action ${selectedUser === user.id ? "active" : ""}`}
@@ -82,6 +105,18 @@ const UserList = () => {
               </button>
             ))}
           </div>
+
+          <nav>
+            <ul className="pagination">
+              {Array.from({ length: Math.ceil(filteredUsers.length / usersPerPage) }).map((_, index) => (
+                <li key={index} className="page-item">
+                  <button onClick={() => paginate(index + 1)} className="page-link">
+                    {index + 1}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
         <div className="col-md-8">
           {selectedUser && <TaskList userId={selectedUser} />}
