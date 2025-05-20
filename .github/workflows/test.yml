@@ -40,6 +40,15 @@ jobs:
         cd backend
         npm run test:coverage
 
+    - name: Debug Backend Coverage
+      run: |
+        echo "Checking backend coverage directory..."
+        ls -la backend/coverage || echo "Backend coverage directory not found!"
+        if [ -d "backend/coverage" ]; then
+          echo "Contents of backend/coverage:"
+          ls -la backend/coverage
+        fi
+
     - name: Cache Frontend Dependencies
       uses: actions/cache@v3
       with:
@@ -58,13 +67,25 @@ jobs:
         cd frontend
         npm run test:coverage
 
+    - name: Debug Frontend Coverage
+      run: |
+        echo "Checking frontend coverage directory..."
+        ls -la frontend/coverage || echo "Frontend coverage directory not found!"
+        if [ -d "frontend/coverage" ]; then
+          echo "Contents of frontend/coverage:"
+          ls -la frontend/coverage
+        fi
+
     - name: Upload Backend Coverage
+      if: success() && exists('backend/coverage')
       uses: actions/upload-artifact@v3
       with:
         name: backend-coverage
         path: backend/coverage
+        if-no-files-found: error
 
     - name: Upload Frontend Coverage
+      if: success() && exists('frontend/coverage')
       uses: actions/upload-artifact@v3
       with:
         name: frontend-coverage
