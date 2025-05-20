@@ -42,6 +42,24 @@
 
 ---
 
+## API URL Configuration
+
+When running the application locally, you'll need to update the API URL in the frontend code from `https://stealth-tybu.onrender.com` to `http://localhost:3001`. This change is necessary because:
+
+1. The frontend is configured to use the production API URL by default
+2. For local development, you'll want to connect to your local backend server
+
+To make this change, update the API URLs in your frontend components (like `UserList.tsx`) from:
+```typescript
+"https://stealth-tybu.onrender.com/users"
+```
+to:
+```typescript
+"http://localhost:3001/users"
+```
+
+This ensures your frontend connects to your local backend server during development.
+
 - Make sure the backend is running before using the frontend for full functionality.
 - Both backend and frontend use `npm` as the package manager.
 
