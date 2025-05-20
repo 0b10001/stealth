@@ -51,89 +51,117 @@ const UserList = () => {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
-    <div className="container mt-4">
-      <div className="row">
-        <div className="col-md-4">
-          <Weather />
-          <h2>Create User</h2>
-          <form onSubmit={handleCreateUser}>
-            <div className="mb-3">
-              <input
-                required
-                type="text"
-                className="form-control"
-                placeholder="Name"
-                value={newUser.name}
-                onChange={(e) =>
-                  setNewUser({ ...newUser, name: e.target.value })
-                }
-              />
+    <div className="container-fluid py-4">
+      <div className="row g-4">
+        {/* Left Column */}
+        <div className="col-lg-4">
+          <div className="card shadow-sm mb-4">
+            <div className="card-body">
+              <Weather />
             </div>
-            <div className="mb-3">
-              <input
-                required
-                type="email"
-                className="form-control"
-                placeholder="Email"
-                value={newUser.email}
-                onChange={(e) =>
-                  setNewUser({ ...newUser, email: e.target.value })
-                }
-              />
-            </div>
-            <button type="submit" className="btn btn-primary">
-              Create User
-            </button>
-          </form>
-
-          <h2 className="mt-4">Users</h2>
-          <div className="mb-3">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Filter users..."
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-            />
-          </div>
-          <div className="table-responsive">
-            <table className="table table-hover">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentUsers.map((user) => (
-                  <tr
-                    key={user.id}
-                    className={selectedUser === user.id ? "table-active" : ""}
-                    onClick={() => setSelectedUser(user.id)}
-                    style={{ cursor: 'pointer' }}
-                  >
-                    <td>{user.name}</td>
-                    <td>{user.email}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           </div>
 
-          <nav>
-            <ul className="pagination">
-              {Array.from({ length: Math.ceil(filteredUsers.length / usersPerPage) }).map((_, index) => (
-                <li key={index} className="page-item">
-                  <button onClick={() => paginate(index + 1)} className="page-link">
-                    {index + 1}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <div className="card shadow-sm">
+            <div className="card-body">
+              <h2 className="h4 mb-4">Create User</h2>
+              <form onSubmit={handleCreateUser}>
+                <div className="mb-3">
+                  <input
+                    required
+                    type="text"
+                    className="form-control form-control-lg"
+                    placeholder="Name"
+                    value={newUser.name}
+                    onChange={(e) =>
+                      setNewUser({ ...newUser, name: e.target.value })
+                    }
+                  />
+                </div>
+                <div className="mb-3">
+                  <input
+                    required
+                    type="email"
+                    className="form-control form-control-lg"
+                    placeholder="Email"
+                    value={newUser.email}
+                    onChange={(e) =>
+                      setNewUser({ ...newUser, email: e.target.value })
+                    }
+                  />
+                </div>
+                <button type="submit" className="btn btn-primary btn-lg w-100">
+                  Create User
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
-        <div className="col-md-8">
-          {selectedUser && <TaskList userId={selectedUser} />}
+
+        {/* Right Column */}
+        <div className="col-lg-8">
+          <div className="card shadow-sm">
+            <div className="card-body">
+              <div className="d-flex justify-content-between align-items-center mb-4">
+                <h2 className="h4 mb-0">Users</h2>
+                <div className="col-md-4">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Search users..."
+                    value={filter}
+                    onChange={(e) => setFilter(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="table-responsive">
+                <table className="table table-hover align-middle">
+                  <thead className="table-light">
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {currentUsers.map((user) => (
+                      <tr
+                        key={user.id}
+                        className={selectedUser === user.id ? "table-primary" : ""}
+                        onClick={() => setSelectedUser(user.id)}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <td>{user.name}</td>
+                        <td>{user.email}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <nav className="mt-4">
+                <ul className="pagination justify-content-center">
+                  {Array.from({ length: Math.ceil(filteredUsers.length / usersPerPage) }).map((_, index) => (
+                    <li key={index} className="page-item">
+                      <button 
+                        onClick={() => paginate(index + 1)} 
+                        className={`page-link ${currentPage === index + 1 ? 'active' : ''}`}
+                      >
+                        {index + 1}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          {selectedUser && (
+            <div className="card shadow-sm mt-4">
+              <div className="card-body">
+                <TaskList userId={selectedUser} />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
