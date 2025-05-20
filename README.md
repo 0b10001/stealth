@@ -74,3 +74,21 @@ This ensures your frontend connects to your local backend server during developm
 - **Cross-Origin Resource Sharing (CORS)**: The backend is configured to allow CORS requests from the frontend. If you change the frontend URL, update the CORS settings in `backend/src/index.ts`.
 - **Dependencies**: All necessary dependencies are listed in the `package.json` files. Run `npm install` in both the `backend` and `frontend` directories to install them.
 - **Development vs. Production**: The instructions provided are for development mode. For production, build the backend and frontend using the respective build commands.
+
+## API Integrations
+
+### OpenWeatherMap API
+The application includes weather information using the OpenWeatherMap API. To use this feature:
+
+1. Sign up for a free API key at [OpenWeatherMap](https://openweathermap.org/api)
+2. Create a `.env` file in the `frontend` directory with the following content:
+   ```
+   VITE_OPENWEATHER_API_KEY=your_api_key_here
+   ```
+3. Replace `your_api_key_here` with your actual OpenWeatherMap API key
+4. The weather component will display current weather conditions for London by default
+
+Note: 
+- The free tier of OpenWeatherMap API has rate limits. For production use, consider upgrading to a paid plan.
+- Never commit the `.env` file to version control. Add it to your `.gitignore` file.
+- For production deployment, set up the environment variables in your hosting platform's configuration.
