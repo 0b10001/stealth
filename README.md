@@ -1,5 +1,7 @@
 # stealth
 
+Live Demo: [https://stealth-puhc.vercel.app/](https://stealth-puhc.vercel.app/)
+
 ## Running the Backend
 
 1. Open a terminal and navigate to the `backend` directory:
