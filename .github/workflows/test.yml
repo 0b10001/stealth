@@ -9,6 +9,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    name: Run Tests
 
     env:
       VITE_OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
@@ -36,6 +37,7 @@ jobs:
         npm ci
 
     - name: Run Backend Tests
+      id: backend-tests
       run: |
         cd backend
         npm run test:coverage
@@ -63,6 +65,7 @@ jobs:
         npm ci
 
     - name: Run Frontend Tests
+      id: frontend-tests
       run: |
         cd frontend
         npm run test:coverage
@@ -89,4 +92,5 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: frontend-coverage
-        path: frontend/coverage 
+        path: frontend/coverage
+        if-no-files-found: error 
