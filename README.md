@@ -1,6 +1,6 @@
 # stealth
 
-[![Run Tests](https://github.com/ob10001/stealth/actions/workflows/test.yml/badge.svg)](https://github.com/ob10001/stealth/actions/workflows/test.yml)
+[![Tests](https://github.com/ob10001/stealth/actions/workflows/test.yml/badge.svg?event=push)](https://github.com/ob10001/stealth/actions/workflows/test.yml)
 
 Live Demo: [https://stealth-puhc.vercel.app/](https://stealth-puhc.vercel.app/)
 
