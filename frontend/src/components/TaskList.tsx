@@ -23,7 +23,7 @@ const TaskList = ({ userId }: TaskListProps) => {
   const fetchTasks = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/users/${userId}/tasks`,
+        `https://stealth-tybu.onrender.com/users/${userId}/tasks`,
       );
       setTasks(response.data);
     } catch (error) {
@@ -34,9 +34,12 @@ const TaskList = ({ userId }: TaskListProps) => {
   const handleCreateTask = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post(`http://localhost:3001/users/${userId}/tasks`, {
-        title: newTask,
-      });
+      await axios.post(
+        `https://stealth-tybu.onrender.com/users/${userId}/tasks`,
+        {
+          title: newTask,
+        },
+      );
       setNewTask("");
       fetchTasks();
     } catch (error) {

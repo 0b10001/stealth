@@ -15,7 +15,9 @@ const UserList = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/users");
+      const response = await axios.get(
+        "https://stealth-tybu.onrender.com/users",
+      );
       setUsers(response.data);
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -25,7 +27,7 @@ const UserList = () => {
   const handleCreateUser = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3001/users", newUser);
+      await axios.post("https://stealth-tybu.onrender.com/users", newUser);
       setNewUser({ name: "", email: "" });
       fetchUsers();
     } catch (error) {
