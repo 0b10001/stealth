@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { User } from "../types";
 import TaskList from "./TaskList";
+import Weather from "./Weather";
 import React from "react";
 
 const UserList = () => {
@@ -53,6 +54,7 @@ const UserList = () => {
     <div className="container mt-4">
       <div className="row">
         <div className="col-md-4">
+          <Weather />
           <h2>Create User</h2>
           <form onSubmit={handleCreateUser}>
             <div className="mb-3">
