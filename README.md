@@ -2,6 +2,22 @@
 
 Live Demo: [https://stealth-puhc.vercel.app/](https://stealth-puhc.vercel.app/)
 
+## Running with Docker
+
+1. Make sure you have Docker and Docker Compose installed on your system
+2. From the root directory, run:
+   ```sh
+   docker-compose up --build
+   ```
+3. The application will be available at:
+   - Frontend: [http://localhost:5173](http://localhost:5173)
+   - Backend: [http://localhost:3001](http://localhost:3001)
+
+To stop the application:
+```sh
+docker-compose down
+```
+
 ## Running the Backend
 
 1. Open a terminal and navigate to the `backend` directory:
